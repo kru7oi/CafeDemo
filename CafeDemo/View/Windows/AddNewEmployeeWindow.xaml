@@ -1,0 +1,64 @@
+﻿<Window x:Class="CafeDemo.View.Windows.AddNewEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CafeDemo.View.Windows"
+        mc:Ignorable="d"
+        Title="Добавить сотрудника"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight">
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="10" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Id:"/>
+        <TextBox Name="IdTb" Grid.Column="2" Background="LightGray" IsReadOnly="True" IsReadOnlyCaretVisible="False"/>
+
+        <TextBlock Grid.Row="2" Text="Имя:"/>
+        <TextBox Name="NameTb"
+             Grid.Row="2" Grid.Column="2"/>
+
+        <TextBlock Grid.Row="4" Text="Дата рождения:"/>
+        <DatePicker Name="DateOfBirthDp"
+                Grid.Row="4" Grid.Column="2"/>
+
+        <TextBlock Grid.Row="6" Text="Должность:"/>
+        <ComboBox Name="RoleCmb"
+              Grid.Row="6" Grid.Column="2"/>
+
+        <TextBlock Grid.Row="8" Text="Логин:"/>
+        <TextBox Name="LoginTb"
+             Grid.Row="8" Grid.Column="2"/>
+
+        <TextBlock Grid.Row="10" Text="Пароль:"/>
+        <TextBox Name="PasswordPb"
+             Grid.Row="10" Grid.Column="2"/>
+
+        <Button Name="AddNewEmployeeBtn"
+            Grid.Row="12" Grid.Column="2"
+            Content="Добавить"
+            Click="AddNewEmployeeBtn_Click"/>
+    </Grid>
+</Window>

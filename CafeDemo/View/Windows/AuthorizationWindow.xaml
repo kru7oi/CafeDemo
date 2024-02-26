@@ -1,0 +1,42 @@
+﻿<Window x:Class="CafeDemo.View.Windows.AuthorizationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CafeDemo.View.Windows"
+        mc:Ignorable="d"
+        Title="Окно авторизации"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen"
+        MinHeight="300"
+        MinWidth="400">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Логин:"/>
+        <TextBox Name="LoginTb" Grid.Column="2"/>
+        
+        <TextBlock Grid.Row="2" Text="Пароль:"/>
+        <PasswordBox Name="PaswwordPb" Grid.Row="2" Grid.Column="2"/>
+        
+        <CheckBox Grid.Row="4" Grid.Column="2" Content="Запомнить меня"/>
+        
+        <Button Name="LoginBtn"
+                Grid.Row="6" Grid.Column="2"
+                Content="Войти" HorizontalAlignment="Left"
+                Click="LoginBtn_Click"/>
+    </Grid>
+</Window>

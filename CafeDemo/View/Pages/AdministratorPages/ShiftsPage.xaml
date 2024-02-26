@@ -1,0 +1,87 @@
+﻿<Page x:Class="CafeDemo.View.Pages.AdministratorPages.ShiftsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CafeDemo.View.Pages.AdministratorPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="782" d:DesignWidth="1560"
+      Title="Страница смен">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="500" />
+        </Grid.ColumnDefinitions>
+
+        <Button Name="AddNewShiftBtn"
+            Content="Сформировать смену" HorizontalAlignment="Left"
+            Click="AddNewShiftBtn_Click"/>
+
+        <ListView Name="ShiftsLv"
+              Grid.Row="2"
+              SelectionChanged="ShiftsLv_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Смена" DisplayMemberBinding="{Binding Shift.Name}"/>
+                    <GridViewColumn Header="Дата начала" DisplayMemberBinding="{Binding DateOfStart, StringFormat=dd.MM.yyyy HH:mm}"/>
+                    <GridViewColumn Header="Дата окончания" DisplayMemberBinding="{Binding DateOfEnd, StringFormat=dd.MM.yyyy HH:mm}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Grid Name="ShiftGrid"
+          Grid.Row="2" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Смена:" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Column="2" Text="{Binding Shift.Name}"/>
+
+            <TextBlock Grid.Row="2" Text="Время начала:" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding DateOfStart, StringFormat=dd.MM.yyyy HH:mm}"/>
+
+            <TextBlock Grid.Row="4" Text="Дата окончания:" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding DateOfEnd, StringFormat=dd.MM.yyyy HH:mm}"/>
+
+            <TextBlock Grid.Row="6" Text="Сотрудники:" HorizontalAlignment="Right"/>
+            <ListBox Name="ShiftEmployeesLb"
+                     Grid.Row="6" Grid.Column="2" Grid.RowSpan="3">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="{Binding Employee.Name}"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Employee.Role.Name}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,588 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CafeDemoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="IsFired" Type="bit" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeShift">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="ShiftId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="ShiftId" Type="int" Nullable="false" />
+          <Property Name="DateOfStart" Type="datetime" Nullable="false" />
+          <Property Name="DateOfEnd" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="NumberOfVisitiors" Type="int" Nullable="false" />
+          <Property Name="TableId" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="IsPaid" Type="bit" Nullable="false" />
+          <Property Name="DateOfAccept" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderPosition">
+          <Key>
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="PositionId" />
+          </Key>
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="PositionId" Type="int" Nullable="false" />
+          <Property Name="IsReady" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="PositionTypeId" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PositionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shift">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MaxVisitors" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Employee_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeShift_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="EmployeeShift" Type="Self.EmployeeShift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeShift">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeShift_Shift">
+          <End Role="Shift" Type="Self.Shift" Multiplicity="1" />
+          <End Role="EmployeeShift" Type="Self.EmployeeShift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shift">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeShift">
+              <PropertyRef Name="ShiftId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Table">
+          <End Role="Table" Type="Self.Table" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="TableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderPosition_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderPosition" Type="Self.OrderPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderPosition">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderPosition_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="1" />
+          <End Role="OrderPosition" Type="Self.OrderPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderPosition">
+              <PropertyRef Name="PositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Position_PositionType">
+          <End Role="PositionType" Type="Self.PositionType" Multiplicity="1" />
+          <End Role="Position" Type="Self.Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PositionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Position">
+              <PropertyRef Name="PositionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CafeDemoModelStoreContainer">
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeShift" EntityType="Self.EmployeeShift" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderPosition" EntityType="Self.OrderPosition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PositionType" EntityType="Self.PositionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shift" EntityType="Self.Shift" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employee_Role" Association="Self.FK_Employee_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeShift_Employee" Association="Self.FK_EmployeeShift_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeeShift" EntitySet="EmployeeShift" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeShift_Shift" Association="Self.FK_EmployeeShift_Shift">
+            <End Role="Shift" EntitySet="Shift" />
+            <End Role="EmployeeShift" EntitySet="EmployeeShift" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Employee" Association="Self.FK_Order_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Table" Association="Self.FK_Order_Table">
+            <End Role="Table" EntitySet="Table" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderPosition_Order" Association="Self.FK_OrderPosition_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderPosition" EntitySet="OrderPosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderPosition_Position" Association="Self.FK_OrderPosition_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="OrderPosition" EntitySet="OrderPosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Position_PositionType" Association="Self.FK_Position_PositionType">
+            <End Role="PositionType" EntitySet="PositionType" />
+            <End Role="Position" EntitySet="Position" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CafeDemoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CafeDemoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employee" EntityType="CafeDemoModel.Employee" />
+          <EntitySet Name="EmployeeShift" EntityType="CafeDemoModel.EmployeeShift" />
+          <EntitySet Name="Order" EntityType="CafeDemoModel.Order" />
+          <EntitySet Name="OrderPosition" EntityType="CafeDemoModel.OrderPosition" />
+          <EntitySet Name="Position" EntityType="CafeDemoModel.Position" />
+          <EntitySet Name="PositionType" EntityType="CafeDemoModel.PositionType" />
+          <EntitySet Name="Role" EntityType="CafeDemoModel.Role" />
+          <EntitySet Name="Shift" EntityType="CafeDemoModel.Shift" />
+          <EntitySet Name="Table" EntityType="CafeDemoModel.Table" />
+          <AssociationSet Name="FK_Employee_Role" Association="CafeDemoModel.FK_Employee_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeShift_Employee" Association="CafeDemoModel.FK_EmployeeShift_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeeShift" EntitySet="EmployeeShift" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Employee" Association="CafeDemoModel.FK_Order_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeShift_Shift" Association="CafeDemoModel.FK_EmployeeShift_Shift">
+            <End Role="Shift" EntitySet="Shift" />
+            <End Role="EmployeeShift" EntitySet="EmployeeShift" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Table" Association="CafeDemoModel.FK_Order_Table">
+            <End Role="Table" EntitySet="Table" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderPosition_Order" Association="CafeDemoModel.FK_OrderPosition_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderPosition" EntitySet="OrderPosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderPosition_Position" Association="CafeDemoModel.FK_OrderPosition_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="OrderPosition" EntitySet="OrderPosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Position_PositionType" Association="CafeDemoModel.FK_Position_PositionType">
+            <End Role="PositionType" EntitySet="PositionType" />
+            <End Role="Position" EntitySet="Position" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsFired" Type="Boolean" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Role" Relationship="CafeDemoModel.FK_Employee_Role" FromRole="Employee" ToRole="Role" />
+          <NavigationProperty Name="EmployeeShift" Relationship="CafeDemoModel.FK_EmployeeShift_Employee" FromRole="Employee" ToRole="EmployeeShift" />
+          <NavigationProperty Name="Order" Relationship="CafeDemoModel.FK_Order_Employee" FromRole="Employee" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="EmployeeShift">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="ShiftId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="ShiftId" Type="Int32" Nullable="false" />
+          <Property Name="DateOfStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateOfEnd" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Employee" Relationship="CafeDemoModel.FK_EmployeeShift_Employee" FromRole="EmployeeShift" ToRole="Employee" />
+          <NavigationProperty Name="Shift" Relationship="CafeDemoModel.FK_EmployeeShift_Shift" FromRole="EmployeeShift" ToRole="Shift" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfVisitiors" Type="Int32" Nullable="false" />
+          <Property Name="TableId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="IsPaid" Type="Boolean" Nullable="false" />
+          <Property Name="DateOfAccept" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Employee" Relationship="CafeDemoModel.FK_Order_Employee" FromRole="Order" ToRole="Employee" />
+          <NavigationProperty Name="Table" Relationship="CafeDemoModel.FK_Order_Table" FromRole="Order" ToRole="Table" />
+          <NavigationProperty Name="OrderPosition" Relationship="CafeDemoModel.FK_OrderPosition_Order" FromRole="Order" ToRole="OrderPosition" />
+        </EntityType>
+        <EntityType Name="OrderPosition">
+          <Key>
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="PositionId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="PositionId" Type="Int32" Nullable="false" />
+          <Property Name="IsReady" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="CafeDemoModel.FK_OrderPosition_Order" FromRole="OrderPosition" ToRole="Order" />
+          <NavigationProperty Name="Position" Relationship="CafeDemoModel.FK_OrderPosition_Position" FromRole="OrderPosition" ToRole="Position" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="PositionTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderPosition" Relationship="CafeDemoModel.FK_OrderPosition_Position" FromRole="Position" ToRole="OrderPosition" />
+          <NavigationProperty Name="PositionType" Relationship="CafeDemoModel.FK_Position_PositionType" FromRole="Position" ToRole="PositionType" />
+        </EntityType>
+        <EntityType Name="PositionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Position" Relationship="CafeDemoModel.FK_Position_PositionType" FromRole="PositionType" ToRole="Position" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="CafeDemoModel.FK_Employee_Role" FromRole="Role" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Shift">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EmployeeShift" Relationship="CafeDemoModel.FK_EmployeeShift_Shift" FromRole="Shift" ToRole="EmployeeShift" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaxVisitors" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="CafeDemoModel.FK_Order_Table" FromRole="Table" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_Employee_Role">
+          <End Type="CafeDemoModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="CafeDemoModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeShift_Employee">
+          <End Type="CafeDemoModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="CafeDemoModel.EmployeeShift" Role="EmployeeShift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeShift">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Employee">
+          <End Type="CafeDemoModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="CafeDemoModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeShift_Shift">
+          <End Type="CafeDemoModel.Shift" Role="Shift" Multiplicity="1" />
+          <End Type="CafeDemoModel.EmployeeShift" Role="EmployeeShift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shift">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeShift">
+              <PropertyRef Name="ShiftId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Table">
+          <End Type="CafeDemoModel.Table" Role="Table" Multiplicity="1" />
+          <End Type="CafeDemoModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="TableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderPosition_Order">
+          <End Type="CafeDemoModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="CafeDemoModel.OrderPosition" Role="OrderPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderPosition">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderPosition_Position">
+          <End Type="CafeDemoModel.Position" Role="Position" Multiplicity="1" />
+          <End Type="CafeDemoModel.OrderPosition" Role="OrderPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderPosition">
+              <PropertyRef Name="PositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Position_PositionType">
+          <End Type="CafeDemoModel.PositionType" Role="PositionType" Multiplicity="1" />
+          <End Type="CafeDemoModel.Position" Role="Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PositionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Position">
+              <PropertyRef Name="PositionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CafeDemoModelStoreContainer" CdmEntityContainer="CafeDemoEntities">
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="CafeDemoModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="IsFired" ColumnName="IsFired" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeShift">
+            <EntityTypeMapping TypeName="CafeDemoModel.EmployeeShift">
+              <MappingFragment StoreEntitySet="EmployeeShift">
+                <ScalarProperty Name="DateOfEnd" ColumnName="DateOfEnd" />
+                <ScalarProperty Name="DateOfStart" ColumnName="DateOfStart" />
+                <ScalarProperty Name="ShiftId" ColumnName="ShiftId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="CafeDemoModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="DateOfAccept" ColumnName="DateOfAccept" />
+                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="NumberOfVisitiors" ColumnName="NumberOfVisitiors" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderPosition">
+            <EntityTypeMapping TypeName="CafeDemoModel.OrderPosition">
+              <MappingFragment StoreEntitySet="OrderPosition">
+                <ScalarProperty Name="IsReady" ColumnName="IsReady" />
+                <ScalarProperty Name="PositionId" ColumnName="PositionId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Position">
+            <EntityTypeMapping TypeName="CafeDemoModel.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="PositionTypeId" ColumnName="PositionTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PositionType">
+            <EntityTypeMapping TypeName="CafeDemoModel.PositionType">
+              <MappingFragment StoreEntitySet="PositionType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="CafeDemoModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shift">
+            <EntityTypeMapping TypeName="CafeDemoModel.Shift">
+              <MappingFragment StoreEntitySet="Shift">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table">
+            <EntityTypeMapping TypeName="CafeDemoModel.Table">
+              <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="MaxVisitors" ColumnName="MaxVisitors" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
