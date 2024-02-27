@@ -22,6 +22,8 @@ namespace CafeDemo.View.Windows
         public AddNewShiftWindow()
         {
             InitializeComponent();
+
+            EmployeesLv.ItemsSource = App.context.Employee.Where(e => e.IsFired == false).ToList();
         }
     }
 }
