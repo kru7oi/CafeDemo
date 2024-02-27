@@ -8,8 +8,139 @@
         Title="Сформировать смену" 
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        SizeToContent="WidthAndHeight">
-    <Grid>
+        Height="700" Width="700">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <!-- Название смены -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Название:"/>
+            <TextBox Name="ShiftNameTb"
+                     Grid.Column="2"/>
+        </Grid>
         
+        <!-- Дата и время начала -->
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Дата и время начала:"/>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <DatePicker Name="DateOfStartDp"/>
+                
+                <TextBox Name="StartHoursTb"
+                         Grid.Column="2"
+                         HorizontalContentAlignment="Center"/>
+                
+                <TextBlock Grid.Column="3" Text=" ч. "/>
+
+                <TextBox Name="StartMinutesTb"
+                         Grid.Column="4"
+                         HorizontalContentAlignment="Center"/>
+
+                <TextBlock Grid.Column="5" Text=" мин. "/>
+            </Grid>
+        </Grid>
+        
+        <!-- Дата и время конца -->
+        <Grid Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Дата и время начала:"/>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <DatePicker Name="DateOfEndDp"/>
+
+                <TextBox Name="EndHoursTb"
+                 Grid.Column="2"
+                 HorizontalContentAlignment="Center"/>
+
+                <TextBlock Grid.Column="3" Text=" ч. "/>
+
+                <TextBox Name="EndMinutesTb"
+                 Grid.Column="4"
+                 HorizontalContentAlignment="Center"/>
+
+                <TextBlock Grid.Column="5" Text=" мин. "/>
+            </Grid>
+        </Grid>
+        
+        <!-- Списки работников -->
+        <TextBlock Grid.Row="6" Text="Работники:"/>
+
+        <Grid Grid.Row="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            
+            <!-- Список всех работников -->
+            <ListView Name="EmployeesLv">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ФИО"
+                                        DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Должность"
+                                        DisplayMemberBinding="{Binding Role.Name}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            
+            <!-- Список выбранных на смену -->
+            <ListView Name="EmployeesOnShiftLv"
+                      Grid.Column="2">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ФИО"
+                                        DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Должность"
+                                        DisplayMemberBinding="{Binding Role.Name}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
     </Grid>
 </Window>

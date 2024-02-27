@@ -1,4 +1,5 @@
 ﻿using CafeDemo.Model;
+using CafeDemo.View.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,8 @@ namespace CafeDemo.View.Pages.AdministratorPages
 
         private void AddNewShiftBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            AddNewShiftWindow addNewShiftWindow = new AddNewShiftWindow();
+            addNewShiftWindow.ShowDialog();
         }
 
         private void ShiftsLv_SelectionChanged(object sender, SelectionChangedEventArgs e)
