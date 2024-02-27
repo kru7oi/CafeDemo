@@ -34,8 +34,7 @@ namespace CafeDemo.Model
                 return IsFired == true ? "Уволен" : "Работает";
             }
         }
-
-
+    
         public virtual Role Role { get; set; }
         public virtual ICollection<EmployeeShift> EmployeeShift { get; set; }
         public virtual ICollection<Order> Order { get; set; }

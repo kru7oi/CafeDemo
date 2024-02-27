@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="af6cd97979dd43a7a9e9ceef8c49715f" Name="Diagram1">
+      <Diagram DiagramId="5ff8a9320b084ae18c470fedd425008d" Name="Diagram1">
         <EntityTypeShape EntityType="CafeDemoModel.Employee" Width="1.5" PointX="3" PointY="4.25" />
-        <EntityTypeShape EntityType="CafeDemoModel.EmployeeShift" Width="1.5" PointX="8.25" PointY="4.625" />
-        <EntityTypeShape EntityType="CafeDemoModel.Order" Width="1.5" PointX="5.25" PointY="4.25" />
-        <EntityTypeShape EntityType="CafeDemoModel.OrderPosition" Width="1.5" PointX="7.5" PointY="1.75" />
-        <EntityTypeShape EntityType="CafeDemoModel.Position" Width="1.5" PointX="5.25" PointY="12.875" />
-        <EntityTypeShape EntityType="CafeDemoModel.PositionType" Width="1.5" PointX="3" PointY="13.125" />
+        <EntityTypeShape EntityType="CafeDemoModel.EmployeeShift" Width="1.5" PointX="5.25" PointY="4.75" />
+        <EntityTypeShape EntityType="CafeDemoModel.Order" Width="1.5" PointX="8.25" PointY="4.25" />
+        <EntityTypeShape EntityType="CafeDemoModel.OrderPosition" Width="1.5" PointX="10.5" PointY="4.625" />
+        <EntityTypeShape EntityType="CafeDemoModel.Position" Width="1.5" PointX="8.25" PointY="8.625" />
+        <EntityTypeShape EntityType="CafeDemoModel.PositionType" Width="1.5" PointX="6" PointY="9" />
         <EntityTypeShape EntityType="CafeDemoModel.Role" Width="1.5" PointX="0.75" PointY="5" />
-        <EntityTypeShape EntityType="CafeDemoModel.Shift" Width="1.5" PointX="6" PointY="9" />
-        <EntityTypeShape EntityType="CafeDemoModel.Table" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="CafeDemoModel.Shift" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="CafeDemoModel.Table" Width="1.5" PointX="6" PointY="1.75" />
         <AssociationConnector Association="CafeDemoModel.FK_Employee_Role" />
         <AssociationConnector Association="CafeDemoModel.FK_EmployeeShift_Employee" />
         <AssociationConnector Association="CafeDemoModel.FK_Order_Employee" />

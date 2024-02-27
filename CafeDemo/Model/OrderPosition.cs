@@ -14,6 +14,7 @@ namespace CafeDemo.Model
     
     public partial class OrderPosition
     {
+        public int Id { get; set; }
         public int OrderId { get; set; }
         public int PositionId { get; set; }
         public bool IsReady { get; set; }

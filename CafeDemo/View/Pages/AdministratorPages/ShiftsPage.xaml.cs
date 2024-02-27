@@ -25,7 +25,7 @@ namespace CafeDemo.View.Pages.AdministratorPages
         {
             InitializeComponent();
 
-            ShiftsLv.ItemsSource = App.context.EmployeeShift.ToList();
+            ShiftsLv.ItemsSource = App.context.Shift.ToList();
         }
 
         private void AddNewShiftBtn_Click(object sender, RoutedEventArgs e)
@@ -35,10 +35,11 @@ namespace CafeDemo.View.Pages.AdministratorPages
 
         private void ShiftsLv_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EmployeeShift selectedShift = ShiftsLv.SelectedItem as EmployeeShift;
+            Shift selectedShift = ShiftsLv.SelectedItem as Shift;
+
             ShiftGrid.DataContext = selectedShift;
 
-            ShiftEmployeesLb.ItemsSource = App.context.EmployeeShift.Where(employeeShift => employeeShift.ShiftId == selectedShift.ShiftId).ToList();
+            ShiftEmployeesLv.ItemsSource = App.context.EmployeeShift.Where(employeeShift => employeeShift.ShiftId == selectedShift.Id).ToList();
         }
     }
 }

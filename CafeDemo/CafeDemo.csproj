@@ -122,6 +122,9 @@
     <Compile Include="View\Windows\AddNewEmployeeWindow.xaml.cs">
       <DependentUpon>AddNewEmployeeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Windows\AddNewShiftWindow.xaml.cs">
+      <DependentUpon>AddNewShiftWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\AdministratorWindow.xaml.cs">
       <DependentUpon>AdministratorWindow.xaml</DependentUpon>
     </Compile>
@@ -210,6 +213,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Windows\AddNewShiftWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Windows\AdministratorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -227,12 +234,11 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Model\CafeModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CafeModel.Context.cs</LastGenOutput>
       <DependentUpon>CafeModel.edmx</DependentUpon>
+      <LastGenOutput>CafeModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Model\CafeModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -17,7 +17,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="500" />
+            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
         <Button Name="AddNewShiftBtn"
@@ -29,7 +29,7 @@
               SelectionChanged="ShiftsLv_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Смена" DisplayMemberBinding="{Binding Shift.Name}"/>
+                    <GridViewColumn Header="Смена" DisplayMemberBinding="{Binding Name}"/>
                     <GridViewColumn Header="Дата начала" DisplayMemberBinding="{Binding DateOfStart, StringFormat=dd.MM.yyyy HH:mm}"/>
                     <GridViewColumn Header="Дата окончания" DisplayMemberBinding="{Binding DateOfEnd, StringFormat=dd.MM.yyyy HH:mm}"/>
                 </GridView>
@@ -56,7 +56,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Смена:" HorizontalAlignment="Right"/>
-            <TextBlock Grid.Column="2" Text="{Binding Shift.Name}"/>
+            <TextBlock Grid.Column="2" Text="{Binding Name}"/>
 
             <TextBlock Grid.Row="2" Text="Время начала:" HorizontalAlignment="Right"/>
             <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding DateOfStart, StringFormat=dd.MM.yyyy HH:mm}"/>
@@ -65,23 +65,17 @@
             <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding DateOfEnd, StringFormat=dd.MM.yyyy HH:mm}"/>
 
             <TextBlock Grid.Row="6" Text="Сотрудники:" HorizontalAlignment="Right"/>
-            <ListBox Name="ShiftEmployeesLb"
+            <ListView Name="ShiftEmployeesLv"
                      Grid.Row="6" Grid.Column="2" Grid.RowSpan="3">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="10" />
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
-
-                            <TextBlock Text="{Binding Employee.Name}"/>
-                            <TextBlock Grid.Column="2" Text="{Binding Employee.Role.Name}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ФИО"
+                                        DisplayMemberBinding="{Binding Employee.Name}"/>
+                        <GridViewColumn Header="Должность"
+                                        DisplayMemberBinding="{Binding Employee.Role.Name}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
     </Grid>
 </Page>

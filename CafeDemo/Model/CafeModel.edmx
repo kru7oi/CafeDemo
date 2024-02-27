@@ -19,13 +19,11 @@
         </EntityType>
         <EntityType Name="EmployeeShift">
           <Key>
-            <PropertyRef Name="EmployeeId" />
-            <PropertyRef Name="ShiftId" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="ShiftId" Type="int" Nullable="false" />
-          <Property Name="DateOfStart" Type="datetime" Nullable="false" />
-          <Property Name="DateOfEnd" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -41,9 +39,9 @@
         </EntityType>
         <EntityType Name="OrderPosition">
           <Key>
-            <PropertyRef Name="OrderId" />
-            <PropertyRef Name="PositionId" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="PositionId" Type="int" Nullable="false" />
           <Property Name="IsReady" Type="bit" Nullable="false" />
@@ -77,6 +75,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DateOfStart" Type="datetime" Nullable="false" />
+          <Property Name="DateOfEnd" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Table">
           <Key>
@@ -290,13 +290,11 @@
         </EntityType>
         <EntityType Name="EmployeeShift">
           <Key>
-            <PropertyRef Name="EmployeeId" />
-            <PropertyRef Name="ShiftId" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
           <Property Name="ShiftId" Type="Int32" Nullable="false" />
-          <Property Name="DateOfStart" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateOfEnd" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Employee" Relationship="CafeDemoModel.FK_EmployeeShift_Employee" FromRole="EmployeeShift" ToRole="Employee" />
           <NavigationProperty Name="Shift" Relationship="CafeDemoModel.FK_EmployeeShift_Shift" FromRole="EmployeeShift" ToRole="Shift" />
         </EntityType>
@@ -317,9 +315,9 @@
         </EntityType>
         <EntityType Name="OrderPosition">
           <Key>
-            <PropertyRef Name="OrderId" />
-            <PropertyRef Name="PositionId" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OrderId" Type="Int32" Nullable="false" />
           <Property Name="PositionId" Type="Int32" Nullable="false" />
           <Property Name="IsReady" Type="Boolean" Nullable="false" />
@@ -359,6 +357,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateOfEnd" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="EmployeeShift" Relationship="CafeDemoModel.FK_EmployeeShift_Shift" FromRole="Shift" ToRole="EmployeeShift" />
         </EntityType>
         <EntityType Name="Table">
@@ -467,7 +467,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -489,10 +489,9 @@
           <EntitySetMapping Name="EmployeeShift">
             <EntityTypeMapping TypeName="CafeDemoModel.EmployeeShift">
               <MappingFragment StoreEntitySet="EmployeeShift">
-                <ScalarProperty Name="DateOfEnd" ColumnName="DateOfEnd" />
-                <ScalarProperty Name="DateOfStart" ColumnName="DateOfStart" />
                 <ScalarProperty Name="ShiftId" ColumnName="ShiftId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -515,6 +514,7 @@
                 <ScalarProperty Name="IsReady" ColumnName="IsReady" />
                 <ScalarProperty Name="PositionId" ColumnName="PositionId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -547,6 +547,8 @@
           <EntitySetMapping Name="Shift">
             <EntityTypeMapping TypeName="CafeDemoModel.Shift">
               <MappingFragment StoreEntitySet="Shift">
+                <ScalarProperty Name="DateOfEnd" ColumnName="DateOfEnd" />
+                <ScalarProperty Name="DateOfStart" ColumnName="DateOfStart" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -576,7 +578,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="true" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

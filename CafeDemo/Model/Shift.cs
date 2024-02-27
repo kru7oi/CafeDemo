@@ -21,6 +21,8 @@ namespace CafeDemo.Model
     
         public int Id { get; set; }
         public string Name { get; set; }
+        public System.DateTime DateOfStart { get; set; }
+        public System.DateTime DateOfEnd { get; set; }
     
         public virtual ICollection<EmployeeShift> EmployeeShift { get; set; }
     }
