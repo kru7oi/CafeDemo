@@ -5,3 +5,5 @@
 
 > :shipit: [Дамп БД](https://cloud.mail.ru/public/SJNZ/2vX2DaR5U)
 
+> [!WARNING]
+> Использовать только в благих целях.
