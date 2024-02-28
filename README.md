@@ -5,5 +5,10 @@
 
 > :shipit: [Дамп БД](https://cloud.mail.ru/public/SJNZ/2vX2DaR5U)
 
+> [!NOTE]
+> Администратор: ivan64, db2e080ab
+> Повар: aleksey2785, 8916e086b
+> Официант: vera2163, bf349755c
+
 > [!WARNING]
 > Использовать только в благих целях 🐵
