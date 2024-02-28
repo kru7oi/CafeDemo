@@ -28,6 +28,7 @@ namespace CafeDemo.View.Pages.AdministratorPages
             InitializeComponent();
 
             EmployeesLv.ItemsSource = App.context.Employee.ToList();
+            EmployeesLv.SelectedIndex = 0;
         }
 
         private void AddNewEmployeeBtn_Click(object sender, RoutedEventArgs e)
@@ -55,7 +56,39 @@ namespace CafeDemo.View.Pages.AdministratorPages
             RoleCmb.ItemsSource = App.context.Role.ToList();
             RoleCmb.DisplayMemberPath = "Name";
             RoleCmb.SelectedValuePath = "Id";
-            RoleCmb.SelectedIndex = (EmployeesLv.SelectedItem as Employee).RoleId - 1;
+            // Влияет на поиск. Выдаёт исключение типа NullReferenceException.
+            // Если при поиске выбранный пользователь пропадает из поиска, то нужно убрать индекс выбранного элемента из комбобокса.
+            RoleCmb.SelectedIndex = EmployeesLv.SelectedItem as Employee != null ? (EmployeesLv.SelectedItem as Employee).RoleId - 1 : -1;
         }
+
+        #region Поиск
+        private void SearchTb_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (SearchTb.Text == string.Empty)
+            {
+                SearchTbl.Text = string.Empty;
+            }
+        }
+
+        private void SearchTb_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (SearchTb.Text == string.Empty)
+            {
+                SearchTbl.Text = "Поиск по имени";
+            }
+        }
+
+        private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (SearchTb.Text != string.Empty)
+            {
+                EmployeesLv.ItemsSource = App.context.Employee.Where(employee => employee.Name.ToLower().Contains(SearchTb.Text.ToLower())).ToList();
+            }
+            else
+            {
+                EmployeesLv.ItemsSource = App.context.Employee.ToList();
+            }
+        }
+        #endregion
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CafeDemo.View.Windows"
         mc:Ignorable="d"
-        Title="Окно администратор"
+        Title="Окно администратора"
         WindowStartupLocation="CenterScreen"
         MinHeight="720" MinWidth="1280"
         Height="900" Width="1600">

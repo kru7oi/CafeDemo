@@ -19,9 +19,28 @@
             <ColumnDefinition Width="500" />
         </Grid.ColumnDefinitions>
 
-        <Button Name="AddNewEmployeeBtn"
-                Content="Добавить сотрудника" HorizontalAlignment="Left"
+        <!-- Меню -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox Name="SearchTb" GotFocus="SearchTb_GotFocus" LostFocus="SearchTb_LostFocus" TextChanged="SearchTb_TextChanged"/>
+            <TextBlock Name="SearchTbl" Text="Поиск по имени" Style="{StaticResource PlaceholderTextBlock}"/>
+
+            <ComboBox Name="FilterByRoleCmb"
+                      Grid.Column="2"/>
+
+            <Button Name="AddNewEmployeeBtn"
+                    Grid.Column="5"
+                Content="Добавить сотрудника"
                 Click="AddNewEmployeeBtn_Click"/>
+        </Grid>
 
         <ListView Name="EmployeesLv"
                   Grid.Row="2"
