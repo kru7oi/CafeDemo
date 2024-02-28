@@ -34,7 +34,8 @@
             <TextBlock Name="SearchTbl" Text="Поиск по имени" Style="{StaticResource PlaceholderTextBlock}"/>
 
             <ComboBox Name="FilterByRoleCmb"
-                      Grid.Column="2"/>
+                      Grid.Column="2"
+                      SelectionChanged="FilterByRoleCmb_SelectionChanged"/>
 
             <Button Name="AddNewEmployeeBtn"
                     Grid.Column="5"
