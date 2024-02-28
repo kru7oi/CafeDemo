@@ -7,12 +7,13 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace CafeDemo.AppData
 {
     internal class AuthorizationHelper
     {
-        public static void CheckData(string login, string password)
+        public static void CheckData(string login, string password, bool? state)
         {
             if (string.IsNullOrEmpty(login))
             {
@@ -43,6 +44,21 @@ namespace CafeDemo.AppData
                             cookWindow.Show();
                             break;
                     }
+
+                    #region Запоминание данных пользователя
+                    if (state == true)
+                    {
+                        Properties.Settings.Default.LoginValue = login;
+                        Properties.Settings.Default.PasswordValue = password;
+                    }
+                    else
+                    {
+                        Properties.Settings.Default.LoginValue = string.Empty;
+                        Properties.Settings.Default.PasswordValue = string.Empty;
+                    }
+
+                    Properties.Settings.Default.Save();
+                    #endregion
 
                     Application.Current.Windows[0].Close();
                 }

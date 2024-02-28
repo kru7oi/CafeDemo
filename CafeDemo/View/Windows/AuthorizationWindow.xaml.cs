@@ -23,13 +23,17 @@ namespace CafeDemo.View.Windows
         public AuthorizationWindow()
         {
             InitializeComponent();
+
+            if (Properties.Settings.Default.LoginValue != string.Empty)
+            {
+                LoginTb.Text = Properties.Settings.Default.LoginValue;
+                PaswwordPb.Password = Properties.Settings.Default.PasswordValue;
+            }
         }
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
-            AuthorizationHelper.CheckData(LoginTb.Text, PaswwordPb.Password);
-
-            
+            AuthorizationHelper.CheckData(LoginTb.Text, PaswwordPb.Password, RememberMeCb.IsChecked);
         }
     }
 }

@@ -32,7 +32,7 @@
         <TextBlock Grid.Row="2" Text="Пароль:"/>
         <PasswordBox Name="PaswwordPb" Grid.Row="2" Grid.Column="2"/>
         
-        <CheckBox Grid.Row="4" Grid.Column="2" Content="Запомнить меня"/>
+        <CheckBox Name="RememberMeCb" Grid.Row="4" Grid.Column="2" Content="Запомнить меня"/>
         
         <Button Name="LoginBtn"
                 Grid.Row="6" Grid.Column="2"
